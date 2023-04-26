@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.weatherjava.databinding.ActivityMainBinding;
+import com.example.weatherjava.model.Weather;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -135,45 +136,41 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
+
+                            // city name
                             JSONObject jsonObject = new JSONObject(response);
                             String day = jsonObject.getString("dt");
                             String name = jsonObject.getString("name");
-                            txtCity.setText(name);
+                            if(name.equals("Turan")){
+                                name="Da Nang";
+                            }
 
+                            //date
                             long dayLong = Long.valueOf(day);
                             Date date = new Date(dayLong*1000L);
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
                             String Day = simpleDateFormat.format(date);
 
-                            txtDate.setText(Day);
+                            //icon, description, status
                             JSONArray jsonArrayWeather = jsonObject.getJSONArray("weather");
                             JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
                             String status = jsonObjectWeather.getString("main");
                             String icon = jsonObjectWeather.getString("icon");
                             String description = jsonObjectWeather.getString("description");
 
-                            Picasso.get().load("https://openweathermap.org/img/w/"+icon+".png").into(icWeather);
-                            Picasso.get().load("https://openweathermap.org/img/w/"+icon+".png").into(icDescription);
 
-                            txtDescription.setText(description);
-                            txtStatus.setText(status);
 
+                            //temp,humidity,feelLike
                             JSONObject jsonObjectMain = jsonObject.getJSONObject("main");
                             String temp = jsonObjectMain.getString("temp");
-//                            String pressure = jsonObjectMain.getString("pressure");
                             String humidity = jsonObjectMain.getString("humidity");
                             String feelLike = jsonObjectMain.getString("feels_like");
 
-                            txtTemp.setText(temp+" ℃");
-                            txtHumidity.setText(humidity+" %");
-                            txtFeelLike.setText(feelLike+ " ℃");
-
-
+                            //wind
                             JSONObject jsonObjectWind = jsonObject.getJSONObject("wind");
                             String wind = jsonObjectWind.getString("speed");
 
-                            txtWind.setText(wind + " m/s");
-
+                            //sunset, sunrise
                             JSONObject jsonObjectSys = jsonObject.getJSONObject("sys");
                             String sunriseDateString = jsonObjectSys.getString("sunrise");
                             String sunsetDateString = jsonObjectSys.getString("sunset");
@@ -188,8 +185,24 @@ public class MainActivity extends AppCompatActivity {
                             Date sunriseDate = new Date(sunriseDateLong*1000L);
                             String sunrise = hourFormat.format(sunriseDate);
 
-                            txtSunrise.setText(sunrise);
-                            txtSunset.setText(sunset);
+
+
+                            Weather weather = new Weather(name,Day,description,status,temp,humidity,feelLike,wind,sunrise,sunset,icon);
+                            weather.toString();
+
+                            txtCity.setText(weather.getName());
+                            txtDate.setText(weather.getDate());
+                            txtDescription.setText(weather.getDescription());
+                            txtStatus.setText(weather.getStatus());
+                            Picasso.get().load("https://openweathermap.org/img/w/"+weather.getIcStatus()+".png").into(icWeather);
+                            Picasso.get().load("https://openweathermap.org/img/w/"+weather.getIcStatus()+".png").into(icDescription);
+                            txtTemp.setText(weather.getTemp()+" ℃");
+                            txtHumidity.setText(weather.getHumidity()+" %");
+                            txtFeelLike.setText(weather.getFeelLike()+ " ℃");
+                            txtWind.setText(weather.getWind() + " m/s");
+                            txtSunrise.setText(weather.getSunrise());
+                            txtSunset.setText(weather.getSunset());
+
 
 
 

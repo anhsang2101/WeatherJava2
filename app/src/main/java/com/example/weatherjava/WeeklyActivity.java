@@ -46,8 +46,6 @@ public class WeeklyActivity extends AppCompatActivity {
         Get7DaysData(city);
 
 
-
-
     }
 
     public void mapping(){
