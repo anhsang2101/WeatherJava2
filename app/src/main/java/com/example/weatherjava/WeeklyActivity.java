@@ -87,6 +87,7 @@ public class WeeklyActivity extends AppCompatActivity {
 
                                 items.add(new ItemWeekly(icon,Day,max,min,description));
                             }
+                            //set apdapter
                             weeklyItems = (RecyclerView) findViewById(R.id.recyclerview);
                             LinearLayoutManager layoutManager = new LinearLayoutManager(WeeklyActivity.this, LinearLayoutManager.VERTICAL, false);
                             weeklyItems.setLayoutManager(layoutManager);

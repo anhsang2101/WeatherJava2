@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "241626461204",
+    "firebase_url": "https://weatherforecast-222db-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "weatherforecast-222db",
+    "storage_bucket": "weatherforecast-222db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241626461204:android:b7d31deb41e9272766e301",
+        "android_client_info": {
+          "package_name": "com.example.weatherjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241626461204-5u9s5cs944jkd0csdso2f4l1loetfiqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPNhaAjI2-yIpKVOuOXDz-XVgk9ZwErZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241626461204-5u9s5cs944jkd0csdso2f4l1loetfiqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
     TextView txtDescription;
 
     View viewNavHeader;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         mapping();
 
@@ -73,38 +73,17 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_today:
-                        Toast.makeText(MainActivity.this, "zxc", Toast.LENGTH_SHORT).show();
+                        navTodayEvent();
                         return true;
                     case R.id.nav_change_city:
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                        dialog.setTitle("Type city's name");
-                        edtSearch = new EditText(MainActivity.this);
-                        edtSearch.setInputType(InputType.TYPE_CLASS_TEXT);
-                        dialog.setView(edtSearch);
-                        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(MainActivity.this, edtSearch.getText().toString(), Toast.LENGTH_SHORT).show();
-                                String city = edtSearch.getText().toString();
-                                GetCurrentWeatherData(city);
-                                Toast.makeText(MainActivity.this, "nice", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        dialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(MainActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        dialog.show();
+                        navChangeCityEvent();
                         return true;
                     case R.id.nav_weekly:
-//                        String city = edtSearch.getText().toString();
-                        String city = "saigon";
-                        Intent intent = new Intent(MainActivity.this, WeeklyActivity.class);
-                        intent.putExtra("name", city);
-                        startActivity(intent);
+                        navWeeklyEvent();
                         return true;
+                    case R.id.nav_fav:
+                        navFavEvent();
+                    return true;
                 }
                 return false;
             }
@@ -140,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                             // city name
                             JSONObject jsonObject = new JSONObject(response);
                             String day = jsonObject.getString("dt");
-                            String name = jsonObject.getString("name");
+                            name = jsonObject.getString("name");
                             if(name.equals("Turan")){
                                 name="Da Nang";
                             }
@@ -207,16 +186,61 @@ public class MainActivity extends AppCompatActivity {
 
 
                         } catch (JSONException e) {
+                            Toast.makeText(MainActivity.this, "Nhap sai ten", Toast.LENGTH_SHORT).show();
                             throw new RuntimeException(e);
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(MainActivity.this, "Nhap sai ten", Toast.LENGTH_SHORT).show();
             }
         });
         requestQueue.add(stringRequest);
+    }
+
+    public void navTodayEvent(){
+        Toast.makeText(MainActivity.this, "Today", Toast.LENGTH_SHORT).show();
+    }
+    public void navChangeCityEvent(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setTitle("Type city's name");
+        edtSearch = new EditText(MainActivity.this);
+        edtSearch.setInputType(InputType.TYPE_CLASS_TEXT);
+        dialog.setView(edtSearch);
+        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(MainActivity.this, edtSearch.getText().toString(), Toast.LENGTH_SHORT).show();
+                String city = edtSearch.getText().toString();
+                GetCurrentWeatherData(city);
+//                Toast.makeText(MainActivity.this, "Thay doi thanh cong", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
+    }
+    public void navWeeklyEvent(){
+//        String city = edtSearch.getText().toString();
+//        String city = "saigon";
+        String city = name;
+        Intent intent = new Intent(MainActivity.this, WeeklyActivity.class);
+        intent.putExtra("name", city);
+        startActivity(intent);
+    }
+    public void navFavEvent(){
+        String city = "saigon";
+        Intent intent = new Intent(MainActivity.this, FavActivity.class);
+        intent.putExtra("name", city);
+        startActivity(intent);
+    }
+    public void navMapEvent(){
+
     }
 
 
