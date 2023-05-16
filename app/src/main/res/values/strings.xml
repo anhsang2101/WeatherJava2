@@ -35,5 +35,6 @@
     <string name="format_wind_kmh"> <xliff:g id="speed">%1$1.0f</xliff:g> km/h</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

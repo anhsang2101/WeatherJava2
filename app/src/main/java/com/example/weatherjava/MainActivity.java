@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         mapping();
 
-        GetCurrentWeatherData("saigon");
+        GetCurrentWeatherData("danang");
 
         navMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -83,7 +83,10 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_fav:
                         navFavEvent();
-                    return true;
+                        return true;
+                    case R.id.nav_map:
+                        navMapEvent();
+                        return true;
                 }
                 return false;
             }
@@ -234,13 +237,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void navFavEvent(){
-        String city = "saigon";
+//        String city = "saigon";
         Intent intent = new Intent(MainActivity.this, FavActivity.class);
-        intent.putExtra("name", city);
+//        intent.putExtra("name", city);
         startActivity(intent);
     }
-    public void navMapEvent(){
 
+    public void navMapEvent(){
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
     }
 
 

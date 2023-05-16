@@ -57,13 +57,13 @@ public class FavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
 
-        Intent intent = getIntent();
-        String city = intent.getStringExtra("name");
-        Log.d("ket qua", "du lieu " + city);
+//        Intent intent = getIntent();
+//        String city = intent.getStringExtra("name");
+//        Log.d("ket qua", "du lieu " + city);
+
         items = new ArrayList<>();
 
         dbRef = FirebaseDatabase.getInstance().getReference("ItemFav");
-
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,6 @@ public class FavActivity extends AppCompatActivity {
                             @Override
                             public void onItemFavReceived(ItemFav itemFav) {
                                 itemFav.setId(dbRef.push().getKey());
-
                                 dbRef.child(itemFav.getId()).setValue(itemFav).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -94,8 +93,8 @@ public class FavActivity extends AppCompatActivity {
                                         Toast.makeText(FavActivity.this, "loi", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
-                                Toast.makeText(FavActivity.this, "nice", Toast.LENGTH_SHORT).show();
+                                fetchFavList();
+//                                Toast.makeText(FavActivity.this, "nice", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override

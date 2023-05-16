@@ -33,6 +33,14 @@ public class Weather {
 
     }
 
+    public Weather(String name, String day, String temp, String status, String icon) {
+        this.name = name;
+        this.date = day;
+        this.temp = temp;
+        this.status = status;
+        this.icStatus = icon;
+    }
+
     public String getName() {
         return name;
     }

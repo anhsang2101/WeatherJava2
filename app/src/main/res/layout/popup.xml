@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="350dp"
+    android:layout_gravity="center">
+
+                <RelativeLayout
+                    android:id="@+id/relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:background="@drawable/weather_forecast">
+                        <TextView
+                            android:id="@+id/city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="New Delhi"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Friday, June 30"
+                            android:textColor="@color/white"
+                            android:layout_below="@+id/city"
+                            android:layout_marginStart="16dp"
+                            android:textSize="20sp" />
+
+
+                        <TextView
+                            android:id="@+id/condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Light Rain"
+                            android:textColor="@color/white"
+                            android:layout_below="@+id/date"
+                            android:layout_marginStart="16dp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="32dp"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:id="@+id/weather_resource"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/art_light_rain"
+                            android:layout_alignParentEnd="true"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:id="@+id/temp_condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="36C"
+                            android:layout_alignParentBottom="true"
+                            android:textColor="@color/white"
+                            android:padding="16dp"
+                            android:textSize="80sp" />
+
+                </RelativeLayout>
+
+        </RelativeLayout>
